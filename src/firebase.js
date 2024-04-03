@@ -21,8 +21,11 @@ const firebaseApp = firebase.initializeApp(firebaseConfig);
 const db = firebaseApp.firestore();
 const auth = firebase.auth();
 const storage = firebase.storage();
+const fs = firebase.firestore();
 const imgDB = getStorage(firebaseApp);
 const textDB = getFirestore(firebaseApp);
 const messages = getStorage(firebaseApp);
+const products = getStorage(firebaseApp);
 
-export { db, auth ,storage , imgDB, textDB , messages};
+// Other exports if needed
+export { db, auth ,storage,fs, imgDB, textDB , messages,products};
