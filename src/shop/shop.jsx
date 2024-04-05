@@ -17,9 +17,13 @@ export default function Shop() {
         const querySnapshot = await getDocs(productsCollection);
         const productsData = [];
         querySnapshot.forEach((doc) => {
+
           productsData.push(doc.data());
-        });
+        }); 
+
+        productsData.reverse();
         setProducts(productsData);
+        
       } catch (error) {
         console.error("Error fetching products: ", error);
       }

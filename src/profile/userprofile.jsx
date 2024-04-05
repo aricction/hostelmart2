@@ -2,13 +2,17 @@ import React, { useEffect, useState } from "react";
 import { auth, db, storage } from "../firebase";
 import { getDownloadURL, ref } from "firebase/storage";
 import { collection, query, where, getDocs } from "firebase/firestore";
-import Product from "../shop/Product.jsx";
+import Product2 from "../shop/Product2.jsx";
+import { createAvatar } from '@dicebear/core';
+import { adventurer } from '@dicebear/collection';
 
 export default function UserProfile() {
     const [user, setUser] = useState('');
     const [userName, setUserName] = useState('');
     const [userEmail, setUserEmail] = useState('');
+    const [userPhone, setUserPhone] = useState('');
     const [userAds, setUserAds] = useState([]);
+    const [avatarSvg, setAvatarSvg] = useState('');
 
     useEffect(() => {
         const fetchUserData = async (authUser) => {
@@ -19,6 +23,7 @@ export default function UserProfile() {
                 if (docSnap.exists) {
                     setUserName(docSnap.data().FirstName);
                     setUserEmail(docSnap.data().Email);
+                    setUserPhone(docSnap.data().Phone);
                     
                 }
                 fetchUserAds(authUser.uid); 
@@ -37,6 +42,13 @@ export default function UserProfile() {
             setUserAds(ads);
         };
 
+        const generateAvatar = (seed) => {
+            const avatar = createAvatar(adventurer, {
+                seed: seed
+            });
+            setAvatarSvg(avatar.toString());
+        };
+        
         const unsubscribe = auth.onAuthStateChanged(async (authUser) => {
             if (authUser) {
                 await Promise.all([
@@ -91,8 +103,9 @@ export default function UserProfile() {
                             <label className="justify-start">Email</label>
                             <p className="sm: ps-2 my-2 text-white dark:bg-gray-900">{userEmail ? userEmail : "Email not available"}</p>
 
-                            <label>Username</label>
-                            <input type="text" placeholder="your name" className="sm: ps-2 my-2 text-white dark:bg-gray-900" />
+                            <label>Phone no</label>
+                            <p className="sm: ps-2 my-2 text-white dark:bg-gray-900">{userPhone ? userPhone : "Phone no not available"}</p>
+
                         </div>
                     </div>
 
@@ -127,7 +140,7 @@ export default function UserProfile() {
                 {userAds.length > 0 ? (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
                         {userAds.map((ad) => (
-                            <Product
+                            <Product2
                                 key={ad.id}
                                 imageUrl={ad.imageUrl}
                                 title={ad.title}

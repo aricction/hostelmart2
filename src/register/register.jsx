@@ -8,6 +8,7 @@ export default function Register() {
     const [LastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [phone, setPhone] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
     const [successMsg, setSuccessMsg] = useState('');
@@ -16,9 +17,13 @@ export default function Register() {
     const handleRegister = (e) => {
         e.preventDefault();
 
-        if (password !== confirmPassword) {
+        if (password !== confirmPassword ) {
             setErrorMsg("Passwords do not match");
+
+            
             return;
+
+            
         }
         else {
 
@@ -27,12 +32,14 @@ export default function Register() {
                 db.collection('users').doc(credential.user.uid).set({
                     FirstName: FirstName,
                     LastName: LastName,
-                    Email: email
+                    Email: email,
+                    Phone: phone
                 }).then(() => {
                     setSuccessMsg('Registration Successful');
                     setFirstName('');
                     setLastName('');
                     setEmail('');
+                    setPhone('');
                     setPassword('');
                     setConfirmPassword('');
                     setErrorMsg('');
@@ -98,6 +105,19 @@ export default function Register() {
                         </label>
                         <div className="mt-2">
                             <input type="email" placeholder="email" onChange={(e) => setEmail(e.target.value)} value={email}
+                                className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+
+                            />
+                        </div>
+                    </div>
+
+                    <div className="form-control">
+                        <label>
+                            <span className="block text-sm font-medium font-bold leading-6 text-gray-900">
+                                Phone no</span>
+                        </label>
+                        <div className="mt-2">
+                            <input type="number" placeholder="phone no" onChange={(e) => setPhone(e.target.value)} value={phone}
                                 className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 
                             />
