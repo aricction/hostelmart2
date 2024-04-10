@@ -69,24 +69,31 @@ export default function Post() {
             const imageRef = storage.ref().child(`ProdImg/${img + now}`);
             await imageRef.put(img);
             const imageUrl = await imageRef.getDownloadURL();
-
+    
             // Get current timestamp
-
+    
             // Store post data in Firestore with timestamp
-            const postRef = await db.collection('products').doc(`${now}`).set({                title,
+            const postRef = await db.collection('products').doc(`${now}`).set({
+                title,
                 description,
                 price: parseFloat(price), // assuming price is a number
                 imageUrl,
                 uid,
                 now
             });
-
+    
             setSuccessMsg("Post uploaded successfully!");
+    
+            // Delay navigation after displaying success message
+            setTimeout(() => {
+                setSuccessMsg('');
+                navigate("/userprofile");
+            }, 3000); // 3000 milliseconds = 3 seconds
         } catch (error) {
             setErrorMsg("Error uploading post: " + error.message);
         }
     }
-
+    
     return (
         <>
             <div className="bg-royal-blue-600 shadow-lg p-4 ">

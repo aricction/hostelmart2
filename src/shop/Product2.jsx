@@ -12,7 +12,7 @@ const Product = ({ imageUrl, title, price, description, uid, now }) => {
     <div className="p-4 md:px-8 md:pt-6">
       <div className="object-cover card lg:w-96 h-96 bg-royal-blue-300 shadow-xl flex-col overflow-hidden rounded-lg border">
         <figure>
-          <img src={imageUrl} alt={title} className="lg:w-full lg:h-96 sm:w-32 sm:h-32 object-cover" />
+          <img src={imageUrl} alt={title} className="lg:w-full lg:h-96 sm:w-16 sm:h-16 object-cover" />
         </figure>
 
         <div className="mt-4 px-5 pb-5">

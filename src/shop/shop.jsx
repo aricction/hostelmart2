@@ -39,8 +39,8 @@ export default function Shop() {
         <Searchbar />
       </div>
 
-      <div className="sm:flex md:ps-20">
-        <div className="flex flex-wrap flex-col md:flex-row justify-start">
+      <div className=" sm:flex md:ps-20">
+        <div className="flex flex-wrap pl-20 flex-col md:flex-row justify-start">
           {products.length > 0 &&
             products.map((product, index) => (
               <Product
